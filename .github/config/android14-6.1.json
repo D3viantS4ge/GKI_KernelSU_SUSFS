@@ -3,8 +3,7 @@
   "include": [
     {
       "sublevel": "145",
-      "patch_level": "2026-05",
-      "manifest_branch": "common-android14-6.1-2026-06"
+      "date": "2026-05"
     }
   ]
 }
