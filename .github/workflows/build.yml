@@ -490,7 +490,8 @@ jobs:
             "Next")
               echo "添加 KernelSU-Next (pershoot dev-susfs)..."
               curl -LSs "https://raw.githubusercontent.com/pershoot/KernelSU-Next/dev-susfs/kernel/setup.sh" | bash -s dev-susfs
-              git -C KernelSU-Next checkout 19d9e1f255d4afedb85eb7032f4725cda6d25d36
+              git -C KernelSU-Next fetch --depth=1 origin 19d9e1f255d4afedb85eb7032f4725cda6d25d36
+              git -C KernelSU-Next checkout FETCH_HEAD
               echo "固定 KernelSU-Next 提交 (WildKernels r20 配对): 19d9e1f"
               ;;
             "SukiSU")
