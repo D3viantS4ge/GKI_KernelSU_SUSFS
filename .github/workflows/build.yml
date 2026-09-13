@@ -479,8 +479,8 @@ jobs:
               cd ..
               ;;
             "Next")
-              echo "添加 KernelSU-Next..."
-              curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/refs/heads/dev/kernel/setup.sh" | bash -s dev_susfs
+              echo "添加 KernelSU-Next (pershoot dev-susfs)..."
+              curl -LSs "https://raw.githubusercontent.com/pershoot/KernelSU-Next/dev-susfs/kernel/setup.sh" | bash -s dev-susfs
               ;;
             "SukiSU")
               echo "添加 ${{ inputs.ksu_variant }}..."
