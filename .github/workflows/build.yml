@@ -264,6 +264,15 @@ jobs:
             git clone https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH"
           fi
 
+          # Pin SUSFS to the commit WildKernels r20 ships for this branch:
+          # mainline HEAD carries v2.3.0 interface changes no KernelSU fork
+          # kernel code supports yet (breaks every variant at fs/super.c)
+          if [ "$SUSFS_BRANCH" == "gki-android14-6.1" ] && [ -z "$LEGACY_SUKISU_CONFIG" ]; then
+            SUSFS_PINNED_COMMIT="4fc9c1898ea66f51847cdbc0d1473ea4ef525a70"
+            echo "固定 SUSFS 提交 (WildKernels r20 配对): $SUSFS_PINNED_COMMIT"
+            git -C susfs4ksu checkout "$SUSFS_PINNED_COMMIT"
+          fi
+
           if [ -n "$LEGACY_SUKISU_CONFIG" ]; then
             SUSFS_FIXED_COMMIT=$(grep "^${SUSFS_BRANCH}=" "$LEGACY_SUKISU_CONFIG" | cut -d'=' -f2-)
             if [ -z "$SUSFS_FIXED_COMMIT" ]; then
@@ -481,6 +490,8 @@ jobs:
             "Next")
               echo "添加 KernelSU-Next (pershoot dev-susfs)..."
               curl -LSs "https://raw.githubusercontent.com/pershoot/KernelSU-Next/dev-susfs/kernel/setup.sh" | bash -s dev-susfs
+              git -C KernelSU-Next checkout 19d9e1f255d4afedb85eb7032f4725cda6d25d36
+              echo "固定 KernelSU-Next 提交 (WildKernels r20 配对): 19d9e1f"
               ;;
             "SukiSU")
               echo "添加 ${{ inputs.ksu_variant }}..."
